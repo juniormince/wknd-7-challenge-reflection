@@ -11,6 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import Delete from '@material-ui/icons/Delete';
 
 class Admin extends Component {
   constructor(props) {
@@ -23,14 +24,14 @@ class Admin extends Component {
 
   getFeedback = () => {
     axios.get('/api/feedback')
-    .then(response => {
-      this.setState({
-        feedbackList: response.data
+      .then(response => {
+        this.setState({
+          feedbackList: response.data
+        });
+      }).catch(error => {
+        alert('sorry didnt work');
+        console.log(`ERROR trying to GET /api/feedback, ${error}`);
       });
-    }).catch(error => {
-      alert('sorry didnt work');
-      console.log(`ERROR trying to GET /api/feedback, ${error}`);
-    });
   }
 
 
@@ -39,55 +40,71 @@ class Admin extends Component {
   }
 
 
+  //THIS DOESNT WORK OR DO ANYTHING YET GIVE IT TIIIIME
+  deleteFeedback = () => {
+    axios.delete('/api/feedback/')
+    .then(response => {
+      console.log('deleted');
+    })
+    .catch(error => {
+      console.log('sorry got problems');
+    });
+  }
+
+
+
   render() {
     return (
       <div className="admin">
         <ResultsHeader />
 
-<Paper className="Paper">
-        <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>
-                                Feeling
+        <Paper className="Paper">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  Feeling
                         </TableCell>
-                            <TableCell>
-                                Comprehension
+                <TableCell>
+                  Comprehension
                         </TableCell>
-                            <TableCell>
-                                Support
+                <TableCell>
+                  Support
                         </TableCell>
-                        <TableCell>
-                                Comments
+                <TableCell>
+                  Comments
                         </TableCell>
-                        <TableCell>
-                                Delete
+                <TableCell>
+                  Delete
                         </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.feedbackList.map((feedback, i) =>
-                            <TableRow key={i}>
-                                <TableCell>
-                                    {feedback.feeling}
-                                </TableCell>
-                                <TableCell>
-                                    {feedback.understanding}
-                                </TableCell>
-                                <TableCell>
-                                    {feedback.support}
-                                </TableCell>
-                                <TableCell>
-                                    {feedback.comments}
-                                </TableCell>
-                                <TableCell>
-                                   DELETE BUTTON HERE
-                                </TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
-                </Paper>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.feedbackList.map((feedback, i) =>
+                <TableRow key={i}>
+                  <TableCell>
+                    {feedback.feeling}
+                  </TableCell>
+                  <TableCell>
+                    {feedback.understanding}
+                  </TableCell>
+                  <TableCell>
+                    {feedback.support}
+                  </TableCell>
+                  <TableCell>
+                    {feedback.comments}
+                  </TableCell>
+                  <TableCell>
+                    <Button onClick={this.deleteFeedback('i')}
+                    >
+                      <Delete />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </Paper>
 
       </div>
     );

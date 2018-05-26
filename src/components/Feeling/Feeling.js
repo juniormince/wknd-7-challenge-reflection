@@ -26,15 +26,10 @@ class Feeling extends Component {
   }
 
   handleSubmit = (event) => {
-    event.preventDefault();
     console.log('add feels');
-
     const action = { type: 'ADD_FEELING', payload: this.state.feeling };
     this.props.dispatch(action);
-
-    this.setState({
-      feeling: '',
-    });
+    
     this.props.history.push('/steptwo'); 
   }
 

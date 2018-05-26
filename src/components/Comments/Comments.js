@@ -25,10 +25,10 @@ class Comments extends Component {
     });
   }
 
+
   handleSubmit = (event) => {
     event.preventDefault();
     console.log('add Comments');
-
     const action = { type: 'ADD_COMMENTS', payload: this.state.comments };
     this.props.dispatch(action);
 
@@ -37,6 +37,8 @@ class Comments extends Component {
     });
     this.props.history.push('/success'); 
   }
+
+
 
 
   render() {
