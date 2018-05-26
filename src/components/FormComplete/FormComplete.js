@@ -7,7 +7,7 @@ class FormComplete extends Component {
     return (
       <div>
         <FeedbackHeader />
-        THANKS ~
+        HEY THANKS
 
       </div>
     );

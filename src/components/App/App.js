@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 //styling
 import './App.css';
@@ -16,10 +18,15 @@ import Admin from '../Admin/Admin';
 import FeedbackHeader from '../FeedbackHeader/FeedbackHeader';
 
 
+const theme = createMuiTheme({
+
+});
+
 
 class App extends Component {
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
       <div className="App">
         <Router>
           <div>
@@ -30,9 +37,11 @@ class App extends Component {
             <Route exact path="/stepfour" component={Comments} />
             <Route exact path="/success" component={FormComplete} />
             <Route exact path="/admin" component={Admin} />
+
           </div>
         </Router>
       </div>
+      </MuiThemeProvider>
     );
   }
 }
