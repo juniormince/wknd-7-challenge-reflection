@@ -31,18 +31,18 @@ router.post('/', (req, res) => {
     });
 });
 
-// router.delete('/:id', (req, res) => {
-//     console.log('DELETE /api/feedback', req.params);
-//     const feedbackId = req.params.id;
-//     pool.query('DELETE FROM "feedback" WHERE "id" = $1;', [feedbackId])
-//         .then((result) => {
-//             res.sendStatus(200);
-//         })
-//         .catch((error) => {
-//             console.log('ROUTER ERROR DELETE GENRE', error);
-//             res.sendStatus(500);
-//         });
-// });
+router.delete('/:id', (req, res) => {
+    console.log('DELETE /api/feedback', req.params);
+    const feedbackId = req.params.id;
+    pool.query('DELETE FROM "feedback" WHERE "id" = $1;', [feedbackId])
+        .then((result) => {
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.log('ROUTER ERROR DELETE GENRE', error);
+            res.sendStatus(500);
+        });
+});
 
 
 

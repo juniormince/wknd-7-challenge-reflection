@@ -21,13 +21,13 @@ class Admin extends Component {
     }
   }
 
-
   getFeedback = () => {
     axios.get('/api/feedback')
       .then(response => {
         this.setState({
           feedbackList: response.data
         });
+        console.log(response.data);
       }).catch(error => {
         alert('sorry didnt work');
         console.log(`ERROR trying to GET /api/feedback, ${error}`);
@@ -39,12 +39,10 @@ class Admin extends Component {
     this.getFeedback();
   }
 
-
-  //THIS DOESNT WORK OR DO ANYTHING YET GIVE IT TIIIIME
-  deleteFeedback = () => {
-    axios.delete('/api/feedback/')
+  deleteFeedback = (id) => {
+    axios.delete(`/api/feedback/${id}`)
     .then(response => {
-      console.log('deleted');
+      this.getFeedback();
     })
     .catch(error => {
       console.log('sorry got problems');
@@ -80,8 +78,8 @@ class Admin extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.feedbackList.map((feedback, i) =>
-                <TableRow key={i}>
+              {this.state.feedbackList.map((feedback) =>
+                <TableRow key={feedback.id}>
                   <TableCell>
                     {feedback.feeling}
                   </TableCell>
@@ -95,7 +93,7 @@ class Admin extends Component {
                     {feedback.comments}
                   </TableCell>
                   <TableCell>
-                    <Button onClick={this.deleteFeedback('i')}
+                    <Button onClick={() => {this.deleteFeedback(feedback.id)}}
                     >
                       <Delete />
                     </Button>
