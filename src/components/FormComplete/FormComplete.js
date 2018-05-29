@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import FeedbackHeader from '../FeedbackHeader/FeedbackHeader';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 
 const mapReduxStateToProps = (reduxState) => (
@@ -31,7 +32,8 @@ class FormComplete extends Component {
       <div>
         <FeedbackHeader />
         HEY THANKS
-      <button onClick={this.submitForm}>submit</button>
+        <br/>
+      <Button onClick={this.submitForm}>submit</Button>
       </div>
     );
   }
